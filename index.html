@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Morning</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: #343a40;
+            position: relative;
+        }
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('YOUR_GOOD_MORNING_IMAGE_URL_HERE') no-repeat center center;
+            background-size: cover;
+            filter: blur(5px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        #background.visible {
+            opacity: 1;
+        }
+        #message {
+            position: relative;
+            font-size: 2.5em;
+            color: #28a745;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        #message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animated-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .animated-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #interactiveSection {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            bottom: 50px;
+            width: 80%;
+            max-width: 600px;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        #interactiveSection.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #interactiveSection.hidden {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        #backgroundAudio {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="message">
+        <p>Good Morning! Have a wonderful day ahead!</p>
+        <button class="animated-button" id="showMoreButton">Show More</button>
+    </div>
+    <div id="interactiveSection" class="hidden">
+        <h2>More Information</h2>
+        <p>Here’s some additional information you might find interesting!</p>
+        <button class="animated-button" id="hideMoreButton">Hide</button>
+    </div>
+    <audio id="backgroundAudio" autoplay loop>
+        <source src="YOUR_AUDIO_URL_HERE" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const message = document.getElementById('message');
+            const background = document.getElementById('background');
+            const interactiveSection = document.getElementById('interactiveSection');
+            const showMoreButton = document.getElementById('showMoreButton');
+            const hideMoreButton = document.getElementById('hideMoreButton');
+
+            // Fade in the background
+            setTimeout(function() {
+                background.classList.add('visible');
+            }, 500); // Delay before background starts fading in
+
+            // Fade in the message
+            setTimeout(function() {
+                message.classList.add('visible');
+            }, 1500); // Delay to ensure background has faded in before message
+
+            // Show more section on button click
+            showMoreButton.addEventListener('click', function() {
+                interactiveSection.classList.remove('hidden');
+                interactiveSection.classList.add('visible');
+            });
+
+            // Hide more section on button click
+            hideMoreButton.addEventListener('click', function() {
+                interactiveSection.classList.remove('visible');
+                interactiveSection.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
